@@ -1,8 +1,9 @@
 class Person {
-    constructor (pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,diabetesPedigreeF,age,outcome) {
+    constructor (pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,diabetesPedigreeF,age,outcome = 0) {
         this.dna = null
+        this.fitness = 0
         this.score = 0
-        this.calculateScore(pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,diabetesPedigreeF,age)
+        this.calculateFitness(pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,diabetesPedigreeF,age)
         this.initBinary(pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,diabetesPedigreeF,age,outcome)
     }
 
@@ -29,9 +30,14 @@ class Person {
         }
     }
 
-    calculateScore(pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,diabetesPedigreeF,age){
-        this.score = calculateHeuristic(pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,diabetesPedigreeF,age)
+    calculateFitness(pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,diabetesPedigreeF,age){
+        this.fitness = calculateHeuristic(pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,diabetesPedigreeF,age)
     }
+
+    calculateScore(target){
+        this.score = abs(target.fitness - this.fitness)
+    }
+
     crossover(otherPerson){
         let newDna = {}
         let att = ["pregnancies","glucose","bloodPressure","skinThickness","insulin","bmi","diabetesPedigreeF","age","outcome"]
@@ -55,10 +61,8 @@ class Person {
         let att = ["pregnancies","glucose","bloodPressure","skinThickness","insulin","bmi","diabetesPedigreeF","age","outcome"]
         for(let i = 0; i<att.length; i++){
             let randomPoint = floor(random(floor(this.dna[att[i]].length/2),this.dna[att[i]].length))
-            console.log("SIN MUTAR: ",this.dna[att[i]])
             if(mutationRate>=random()){
                 this.dna[att[i]][randomPoint] === 0 ? (this.dna[att[i]][randomPoint]=1) : (this.dna[att[i]][randomPoint]=0)
-                console.log("MUTADO: ",this.dna[att[i]])
             }
         }
     }

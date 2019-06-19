@@ -1,21 +1,59 @@
+let populationLen = 100
 let data
+let population
+let target
+let go = false
 
-function preload(){
-  txt = loadStrings('assets/diabetes.txt',(data)=>{
-    data = data
-  })
+let input = {
+  pregnancies:5,
+  glucose:120,
+  bloodPressure:80,
+  skinThickness:30,
+  insulin:270,
+  bmi:37,
+  diabetesPedigreeF:0.5,
+  age:28,
 }
 
-function setup(){
-  console.log(data)
-  let person1 = new Person(123,23,43,56,32,65,78,11,1)  
-  let person2 = new Person(122,20,40,50,30,64,76,10,1)
-  console.log(person1,person2)
-  let child = person1.crossover(person2)
-  child.mutate()
+async function setup(){
+  // Creating target person
+  target = new Person(input.pregnancies,input.glucose,input.bloodPressure,input.skinThickness,input.insulin,input.bmi,input.diabetesPedigreeF,input.age)
+  //format data
+  let response = await fetch('assets/diabetes.txt')
+  let myData = await response.text()
+  data = myData.split("\n").map(e => e.split(","))
+  data.shift()
   
+  // Create new population
+  population = new Population(target, populationLen)
+  // Select top populationLen(100) around target
+  population.initPopulation(data)
+
+  go = true
 }
 
-function draw(){
+async function draw(){
+  if (go) {
+    //Verify if populationVerify function == "true"
+    //End if fitness == 0 or value found repeat 100 times
+    population.verify() && population.verifyImprovement() && noLoop()
 
+    // Create matingpool
+    population.createMatePool()
+
+    // Delete worst one - Double best one
+    population.improve()
+  
+    // Crossover one each other
+    population.crossoverPopulation()
+  
+    // Mutate population
+    population.mutatePopulation(0.05)
+  
+    // Replace  new generation to old generation
+    population.replace()
+    // console.log(population.persons.length)
+    //Print fitness
+    population.printFitness()
+  }
 }

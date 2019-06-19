@@ -1,5 +1,5 @@
 class Population {
-    constructor(target, maxPopulation = 40){
+    constructor(target, maxPopulation = 100){
         this.persons = []
         this.winner = null
         this.finished = false
@@ -7,8 +7,11 @@ class Population {
         this.matePool = []
         this.target = target
         this.maxPopulation = maxPopulation
+        this.newGeneration = []
     }
     initPopulation(data){
+        console.log("Dataset")
+        console.log(data)
         for(let i=0;i<data.length;i++){
             let pregnancies = parseInt(data[i][0])
             let glucose = parseInt(data[i][1])   
@@ -21,17 +24,94 @@ class Population {
             let outcome = parseInt(data[i][8])
             this.persons[i] = new Person(pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,diabetesPedigreeF,age,outcome)
         }
-        filterPersons(this.maxPopulation)
+        this.filterPersons(this.maxPopulation)
     }
     filterPersons(n){
+        console.log("Poblacion inicial")
         let closest = this.persons.map((e)=>{
-          e.closeValue = abs(e.fitness - this.targetPerson.fitness)
+          e.calculateScore(this.target)  
+        //   e.closeValue = abs(e.fitness - this.target.fitness)
           return e
-        })  
-        closest.sort((a,b)=>a.closeValue-b.closeValue)
+        }) 
+        closest.sort((a,b)=>a.score-b.score)
         this.persons = []
         for(let i = 0; i<n; i++){
           this.persons[i] = closest[i]
-        } 
+        }
+        //console.log(this.persons) 
+    }
+    createMatePool(){
+        console.log("Creando matePool")
+        this.matePool = buildMatePool(this.persons)
+        //console.log("matepool -> ",this.matePool)
+    }
+    crossoverPopulation(){
+        this.newGeneration = []
+        console.log("Crossover - Generando hijos")
+        for(let i=0; i<this.matePool.length;i++){
+            let posPA = this.matePool[i][0]
+            let posPB = this.matePool[i][1]
+            let parentA = this.persons[posPA]
+            let parentB = this.persons[posPB]
+            let child1 = parentA.crossover(parentB)
+            let child2 = parentB.crossover(parentA)
+            this.newGeneration.push(child1)
+            this.newGeneration.push(child2)
+        }
+    }
+    mutatePopulation(rate = 0.2){
+        console.log("Mutate - mutacion de hijos")
+        for(let i=0; i< this.newGeneration.length;i++){
+            this.newGeneration[i].mutate(rate)
+        }
+    }
+    replace(){
+        this.persons = this.newGeneration
+        //console.log("Nueva generacion: ",this.persons)
+    }
+    verify(){
+        for (let i = 0; i < this.persons.length; i++) {
+            if (abs(this.persons[i].fitness - this.target.fitness) === 0){
+                this.finished = true
+                this.winner = this.persons[i]
+                console.log("Winner is -> ",this.persons[i])
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+    verifyImprovement(){
+        let counter = 0
+        for (let i = 0; i < this.persons.length; i++) {
+            if(i !== 0){
+                if(this.persons[i].fitness === this.persons[i - 1].fitness){
+                    this.winner = this.persons[i]
+                    counter+=1
+                }
+            }
+        }
+        // Si se repite mas de 80 veces entonces culmina el algoritmo y devuelve algun target
+            if(counter >= Math.round(0.9*this.maxPopulation)){
+            this.finished = true
+            return true
+        } else {
+            this.finished = false
+            this.winner = null
+            return false
+        }
+    }
+    improve(){
+        // add best one
+        let bestPos = getBestPos(this.persons)
+        // get worst one
+        let worstPos = getWorstPos(this.persons)
+        // replace best for worst
+        this.persons[worstPos] = this.persons[bestPos]
+    }
+    printFitness(){
+        for (let i = 0; i < this.persons.length; i++) {
+            console.log(this.persons[i].fitness)
+        }
     }
 }

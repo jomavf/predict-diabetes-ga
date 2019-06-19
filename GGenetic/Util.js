@@ -36,3 +36,54 @@ const bin2dec = (arr) => {
     }
     return sum
 }
+
+const buildMatePool = (array) =>{
+  let mateArray = []
+  let optionsArray = []
+  let size = array.length
+  if (size % 2 !== 0) {
+    console.log("Cant build a mate pool for odd size array");
+    return undefined
+  } 
+  let sizeMax = size / 2
+  // Init options array
+  for (let i = sizeMax; i < sizeMax * 2; i++) {
+    optionsArray[i-sizeMax] = i
+  }
+  // Init mate array
+  for (let i = 0; i < sizeMax; i++) {
+    mateArray[i]=[]
+  }
+  for (let i = 0; i < sizeMax; i++) {
+    mateArray[i][0] = i
+    // Find a random value in the actual optionsArray
+    let value = random(optionsArray)
+    let position = optionsArray.indexOf(value)
+    mateArray[i][1] = value 
+    optionsArray.splice(position,1)
+  }
+  return mateArray
+}
+
+const getBestPos = (array) => {
+  let bestFitness = -Infinity
+  let bestPos = -1
+  for (let i = 0; i < array.length; i++) {
+    if(array[i].fitness >= bestFitness){
+      bestFitness = array[i].fitness
+      bestPos = i
+    }
+  }
+  return bestPos
+}
+
+const getWorstPos = (array) => {
+  let worstFitness = Infinity
+  let worstPos = -1
+  for (let i = 0; i < array.length; i++) {
+    if(array[i].fitness <= worstFitness){
+      worstFitness = array[i].fitness
+      worstPos = i
+    }
+  }
+}
