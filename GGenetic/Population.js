@@ -7,11 +7,9 @@ class Population {
         this.matePool = []
         this.target = target
         this.maxPopulation = maxPopulation
-        this.newGeneration = []
+        this.newGeneratiSon = []
     }
     initPopulation(data){
-        console.log("Dataset")
-        console.log(data)
         for(let i=0;i<data.length;i++){
             let pregnancies = parseInt(data[i][0])
             let glucose = parseInt(data[i][1])   
@@ -38,7 +36,7 @@ class Population {
         for(let i = 0; i<n; i++){
           this.persons[i] = closest[i]
         }
-        //console.log(this.persons) 
+        //console.log(this.persons)
     }
     createMatePool(){
         console.log("Creando matePool")

@@ -1,5 +1,5 @@
 class Person {
-    constructor (pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,diabetesPedigreeF,age,outcome = 0) {
+    constructor (pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,diabetesPedigreeF,age,outcome=0) {
         this.dna = null
         this.fitness = 0
         this.score = 0
@@ -8,15 +8,15 @@ class Person {
     }
 
     initBinary(pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,diabetesPedigreeF,age,outcome){
-        pregnancies = dec2bin(pregnancies)
-        glucose = dec2bin(glucose)
-        bloodPressure = dec2bin(bloodPressure)
-        skinThickness = dec2bin(skinThickness)
-        insulin = dec2bin(insulin)
-        bmi = dec2bin(bmi)
-        diabetesPedigreeF = dec2bin(diabetesPedigreeF)
-        age = dec2bin(age)
-        outcome = dec2bin(outcome)
+        pregnancies = fillArray(dec2bin(pregnancies),maxLenPregnancies)
+        glucose = fillArray(dec2bin(glucose),maxLenGlucose)
+        bloodPressure = fillArray(dec2bin(bloodPressure),maxLenBloodPressure)
+        skinThickness = fillArray(dec2bin(skinThickness),maxLenSkinThickness)
+        insulin = fillArray(dec2bin(insulin),maxLenInsulin)
+        bmi = fillArray(dec2bin(bmi),maxLenBmi)
+        diabetesPedigreeF = fillArray(dec2bin(diabetesPedigreeF),maxLenDiabetesPedigreeF)
+        age = fillArray(dec2bin(age),maxLenAge)
+        outcome = fillArray(dec2bin(outcome),maxLenOutcome)
         this.dna = {
             pregnancies,
             glucose,

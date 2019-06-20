@@ -16,14 +16,15 @@ const replaceElements = (me,other,position,lastOrFirst = "last") => {
 }
 
 const dec2bin = (number) => {
-    let binaryValue = []
-    while(number > 0){
-      let n = number%2
-      binaryValue.push(n)
-      number = floor(number / 2)
-    }
-    binaryValue.reverse()
-    return binaryValue  
+
+  let binaryValue = []
+  while(number > 0){
+    let n = number%2
+    binaryValue.push(n)
+    number = Math.floor(number / 2)
+  }
+  binaryValue.reverse()
+  return binaryValue  
 }
 
 const bin2dec = (arr) => {
@@ -86,4 +87,27 @@ const getWorstPos = (array) => {
       worstPos = i
     }
   }
+}
+
+// Valores sacados a mano
+var maxLenPregnancies = dec2bin(17).length
+var maxLenGlucose = dec2bin(199).length
+var maxLenBloodPressure = dec2bin(122).length
+var maxLenSkinThickness = dec2bin(99).length
+var maxLenInsulin = dec2bin(846).length
+var maxLenBmi = dec2bin(67).length
+var maxLenDiabetesPedigreeF = dec2bin(2).length
+var maxLenAge = dec2bin(50).length
+var maxLenOutcome = dec2bin(1).length
+
+const fillArray = (arr,len) => {
+  let myLen = arr.length
+  let newArr = []
+  for (let i = 0; i < len - myLen; i++) {
+    newArr.push(0)
+  }
+  for (let i = 0; i < myLen; i++) {
+    newArr.push(arr[i])
+  }
+  return newArr
 }
