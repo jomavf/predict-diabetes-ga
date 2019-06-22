@@ -36,6 +36,7 @@ class Population {
         for(let i = 0; i<n; i++){
           this.persons[i] = closest[i]
         }
+        console.log(this.persons)
         //console.log(this.persons)
     }
     createMatePool(){
@@ -64,6 +65,9 @@ class Population {
         }
     }
     replace(){
+        for (let i = 0; i < this.newGeneration.length; i++) {
+            this.newGeneration[i].calculateScore(this.target)
+        }
         this.persons = this.newGeneration
         //console.log("Nueva generacion: ",this.persons)
     }
@@ -90,8 +94,19 @@ class Population {
             }
         }
         // Si se repite mas de 80 veces entonces culmina el algoritmo y devuelve algun target
-            if(counter >= Math.round(0.9*this.maxPopulation)){
+            if(counter >= Math.round(this.maxPopulation-1)){
             this.finished = true
+            console.log("The winner is: Population number -> ",iteration)
+            let percentaje = 0
+            // this.persons.forEach(person=>person.dna.outcome[0] === 1 percentaje++)
+            for (let i = 0; i < this.persons.length; i++) {
+                console.log(this.persons[i].dna.outcome[0])
+                if(this.persons[i].dna.outcome[0] === 1 || this.persons[i].dna.outcome[0] === '1'){
+                    percentaje+=1
+                }
+            }
+            createDiv(`Ganador 😃 Precision: ${percentaje}`)
+            console.log(`El objetivo tiene un ${percentaje}% de probabilidades de tener la enferdad de diabetes`)
             return true
         } else {
             this.finished = false
@@ -109,7 +124,7 @@ class Population {
     }
     printFitness(){
         for (let i = 0; i < this.persons.length; i++) {
-            console.log(this.persons[i].fitness)
+            console.log(this.persons[i].fitness," ",this.target.fitness)
         }
     }
 }

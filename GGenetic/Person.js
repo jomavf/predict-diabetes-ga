@@ -60,9 +60,17 @@ class Person {
     mutate(mutationRate = 0.2){
         let att = ["pregnancies","glucose","bloodPressure","skinThickness","insulin","bmi","diabetesPedigreeF","age","outcome"]
         for(let i = 0; i<att.length; i++){
-            let randomPoint = floor(random(floor(this.dna[att[i]].length/2),this.dna[att[i]].length))
-            if(mutationRate>=random()){
-                this.dna[att[i]][randomPoint] === 0 ? (this.dna[att[i]][randomPoint]=1) : (this.dna[att[i]][randomPoint]=0)
+            if(att['outcome']){
+                let randomPoint = floor(random(floor(this.dna[att[i]].length/2),this.dna[att[i]].length))
+                if(0.000125>=random()){
+                    this.dna[att[i]][randomPoint] === 0 ? (this.dna[att[i]][randomPoint]=1) : (this.dna[att[i]][randomPoint]=0)
+                }
+            }else{
+                let randomPoint = floor(random(floor(this.dna[att[i]].length/2),this.dna[att[i]].length))
+                // let randomPoint = floor(random(floor(3*this.dna[att[i]].length/4),this.dna[att[i]].length))
+                if(mutationRate>=random()){
+                    this.dna[att[i]][randomPoint] === 0 ? (this.dna[att[i]][randomPoint]=1) : (this.dna[att[i]][randomPoint]=0)
+                }
             }
         }
     }

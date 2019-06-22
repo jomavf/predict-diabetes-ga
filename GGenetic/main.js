@@ -30,7 +30,6 @@ function setup(){
 function draw(){
   if (go && isEthical) {
     if (iteration === 0){
-      console.log('ITERATION',iteration)
       // Create new population
       console.log('Creating population')
       population = new Population(target, populationLen)
@@ -41,7 +40,7 @@ function draw(){
     else if (iteration > 0) {
       //Verify if populationVerify function == "true"
       //End if fitness == 0 or value found repeat 100 times
-      population.verify() && population.verifyImprovement() && noLoop()
+      population.verify() || population.verifyImprovement() && noLoop()
   
       // Create matingpool
       population.createMatePool()
@@ -53,7 +52,7 @@ function draw(){
       population.crossoverPopulation()
     
       // Mutate population
-      population.mutatePopulation(0.2)
+      population.mutatePopulation(0.00025)
     
       // Replace  new generation to old generation
       population.replace()

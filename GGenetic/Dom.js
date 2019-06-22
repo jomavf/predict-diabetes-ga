@@ -10,13 +10,13 @@ var inputDiabetesPedigreeF
 var inputAge
 
 var valuePregnancies
-var valueGlucose
-var valueBloodPressure
+var valueGlucose 
+var valueBloodPressure 
 var valueSkinThickness
-var valueInsulin
-var valueBmi
-var valueDiabetesPedigreeF
-var valueAge
+var valueInsulin 
+var valueBmi 
+var valueDiabetesPedigreeF 
+var valueAge 
 
 var readDataBtn
 var startBtn
@@ -55,19 +55,19 @@ const setDOM = function () {
 	inputGlucose = createInput('');
 	inputGlucose.input(function(){valueGlucose = this.value()});
 
-	createDiv('Presion de sangre')
+	createDiv('Presion de sangre (mmHg)')
 	inputBloodPressure = createInput('');
 	inputBloodPressure.input(function(){valueBloodPressure = this.value()});
 
-	createDiv('Grosor de piel')
+	createDiv('Grosor de piel (mm)')
 	inputSkinThickness = createInput('');
 	inputSkinThickness.input(function(){valueSkinThickness = this.value()});
 
-	createDiv('Nivel de insulina')
+	createDiv('Nivel de insulina (mU/ml)')
 	inputInsulin = createInput('');
 	inputInsulin.input(function(){valueInsulin = this.value()});
 
-	createDiv('BMI (0 < bmi < 67.1)')
+	createDiv('BMI <b>(0 Kg/h^2 < bmi < 67.1 Kg/h^2)</b>')
 	inputBmi = createInput('');
 	inputBmi.input(ethicalFunction);
 	

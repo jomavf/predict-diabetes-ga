@@ -67,11 +67,11 @@ const buildMatePool = (array) =>{
 }
 
 const getBestPos = (array) => {
-  let bestFitness = -Infinity
+  let bestScore = Infinity
   let bestPos = -1
   for (let i = 0; i < array.length; i++) {
-    if(array[i].fitness >= bestFitness){
-      bestFitness = array[i].fitness
+    if(array[i].score <= bestScore){
+      bestScore = array[i].score
       bestPos = i
     }
   }
@@ -79,14 +79,15 @@ const getBestPos = (array) => {
 }
 
 const getWorstPos = (array) => {
-  let worstFitness = Infinity
+  let worstScore = -Infinity
   let worstPos = -1
   for (let i = 0; i < array.length; i++) {
-    if(array[i].fitness <= worstFitness){
-      worstFitness = array[i].fitness
+    if(array[i].score >= worstScore){
+      worstScore = array[i].score
       worstPos = i
     }
   }
+  return worstPos
 }
 
 // Valores sacados a mano
