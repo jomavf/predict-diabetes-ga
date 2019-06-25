@@ -88,10 +88,12 @@ class Population {
         for (let i = 0; i < this.persons.length; i++) {
             if(i !== 0){
                 if(this.persons[i].fitness === this.persons[i - 1].fitness){
-                    this.winner = this.persons[i]
                     counter+=1
                 }
-            }
+                else {
+                    counter = 0
+                }
+            } 
         }
         // Si se repite mas de 99 veces entonces culmina el algoritmo y devuelve algun target
             if(counter >= Math.round(this.maxPopulation-1)){
@@ -99,13 +101,20 @@ class Population {
             console.log("The winner is: Population number -> ",iteration)
             let percentaje = 0
             // this.persons.forEach(person=>person.dna.outcome[0] === 1 percentaje++)
+            let bestpos = getBestPos(this.persons)
+            this.winner = this.persons[bestpos]
             for (let i = 0; i < this.persons.length; i++) {
-                console.log(this.persons[i].dna.outcome[0])
+                // console.log(this.persons[i].dna.outcome[0])
                 if(this.persons[i].dna.outcome[0] === 1 || this.persons[i].dna.outcome[0] === '1'){
                     percentaje+=1
                 }
             }
-            createDiv(`Ganador 😃 Precision: ${percentaje}`)
+            // createDiv(`Resultados 😃: ${percentaje}`)
+            if(this.winner.dna.outcome[0] === '1'){
+                createElement("h1",`Tienes diabetes 😟`)
+            } else {
+                createElement("h1",`No tienes diabetes 😃`)
+            }
             console.log(`El objetivo tiene un ${percentaje}% de probabilidades de tener la enferdad de diabetes`)
             return true
         } else {
