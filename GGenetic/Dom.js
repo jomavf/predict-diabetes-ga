@@ -102,7 +102,8 @@ const setDOM = function () {
 
 	createDiv('<br>')
 	readDataBtn = createButton('Cargar datos');
-	.class("btn btn-warning")
+	readDataBtn.class('button');
+	createDiv('<hr>')
 	readDataBtn.mousePressed(()=>{
 		loadData().then(()=>{
 			let div = createDiv('Datos cargados correctamente')
@@ -118,7 +119,12 @@ const setDOM = function () {
 	validationMessage.id('validMess')
 
 	startBtn = createButton('Iniciar algoritmo');
-	startBtn.class("btn btn-primary")
+
+	startBtn.id("startBn")
+	var startBn = document.getElementById("startBn");
+	startBn.classList.add("button");
+	startBn.classList.add("is-primary");
+
 	startBtn.mousePressed(()=>{
 		if(isEthical){
 			document.getElementById('validMess').innerText = ""
@@ -135,7 +141,7 @@ const setDOM = function () {
 			go = true
 		} else {
 			document.getElementById('validMess').innerText = "Porfavor ingrese datos validos en el campo BMI"
-			validMess.style("color","red")
+			validationMessage.style("color","red")
 		}
 	})
 

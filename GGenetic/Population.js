@@ -113,11 +113,23 @@ class Population {
 
             // createDiv(`Resultados 😃: ${percentaje}`)
             if(this.winner.dna.outcome[0] =='1'){
-                createElement("h1",`${percentaje} tienen diabetes 😟`)
-                createElement("h1",`Tienes diabetes 😟`)
+                var element = createElement("h1",`${percentaje} tienen diabetes 😟`)
+                element.id('message1')
+                var message1 = document.getElementById("message1");
+                message1.classList.add("title");
+                var element1 = createElement("h1",`Tienes diabetes 😟`)
+                element1.id('message2')
+                var message2 = document.getElementById("message2");
+                message2.classList.add("title");
             } else {
-                createElement("h1",`${percentaje} tienen diabetes 😟`)
-                createElement("h1",`No tienes diabetes 😃`)
+                var element3 = createElement("h1",`${percentaje} tienen diabetes 😟`)
+                element3.id('message3')
+                var message3 = document.getElementById("message3");
+                message3.classList.add("title");
+                var element4 = createElement("h1",`No tienes diabetes 😃`)
+                element4.id('message4')
+                var message4 = document.getElementById("message4");
+                message4.classList.add("title");
             }
             console.log(`El objetivo tiene un ${percentaje}% de probabilidades de tener la enferdad de diabetes`)
             return true
