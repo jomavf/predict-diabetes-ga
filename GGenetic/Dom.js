@@ -102,6 +102,7 @@ const setDOM = function () {
 
 	createDiv('<br>')
 	readDataBtn = createButton('Cargar datos');
+	.class("btn btn-warning")
 	readDataBtn.mousePressed(()=>{
 		loadData().then(()=>{
 			let div = createDiv('Datos cargados correctamente')
@@ -117,6 +118,7 @@ const setDOM = function () {
 	validationMessage.id('validMess')
 
 	startBtn = createButton('Iniciar algoritmo');
+	startBtn.class("btn btn-primary")
 	startBtn.mousePressed(()=>{
 		if(isEthical){
 			document.getElementById('validMess').innerText = ""
