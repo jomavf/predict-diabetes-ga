@@ -55,7 +55,7 @@ function draw(){
       population.crossoverPopulation()
     
       // Mutate population
-      population.mutatePopulation(0.00025)
+      population.mutatePopulation(0.00125)
     
       // Replace  new generation to old generation
       population.replace()

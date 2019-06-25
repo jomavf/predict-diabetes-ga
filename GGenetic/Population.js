@@ -110,7 +110,7 @@ class Population {
                 }
             }
             // createDiv(`Resultados 😃: ${percentaje}`)
-            if(this.winner.dna.outcome[0] === '1'){
+            if(this.winner.dna.outcome[0] =='1'){
                 createElement("h1",`Tienes diabetes 😟`)
             } else {
                 createElement("h1",`No tienes diabetes 😃`)
