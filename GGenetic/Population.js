@@ -93,7 +93,7 @@ class Population {
                 }
             }
         }
-        // Si se repite mas de 80 veces entonces culmina el algoritmo y devuelve algun target
+        // Si se repite mas de 99 veces entonces culmina el algoritmo y devuelve algun target
             if(counter >= Math.round(this.maxPopulation-1)){
             this.finished = true
             console.log("The winner is: Population number -> ",iteration)

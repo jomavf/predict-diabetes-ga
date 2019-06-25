@@ -25,7 +25,7 @@ async function main() {
     await driver.findElement(By.xpath('/html/body/button[1]')).click();
     await driver.sleep(100);
     await driver.findElement(By.xpath('/html/body/button[2]')).click();
-    await driver.sleep(30000);
+    await driver.sleep(20000);
     // await driver.sleep(100);
     // driver.wait(function () {
     //     return driver.isElementPresent(driver.By.xpath("/html/body/div[12]"));
@@ -35,7 +35,9 @@ async function main() {
     fs.writeFile(`./images/${uuidv1()}.png`, base64Image, {encoding: 'base64'}, function(err) {
         console.log(err)
     });
-    driver.quit()
+    setTimeout(()=>{
+      driver.quit()
+    },2000)
   }
 };
 

@@ -23,8 +23,11 @@ function createTargetPerson(p,g,bp,st,i,b,dpf,a){
 
 function setup(){
   iteration = 0
+  // createCanvas(500,800)
   noCanvas()
+  background(0)
   setDOM()
+  
 }
 
 function draw(){
