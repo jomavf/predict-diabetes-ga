@@ -5,7 +5,7 @@ const fs = require('fs');
 async function main() {
   let driver = await new Builder().forBrowser('chrome').build();
   try {
-    await driver.get('http://localhost:5500');
+    await driver.get('http://127.0.0.1:5500/GGenetic/');
     await driver.findElement(By.xpath('/html/body/input[1]')).sendKeys('0');
     await driver.sleep(100);
     await driver.findElement(By.xpath('/html/body/input[2]')).sendKeys('137');

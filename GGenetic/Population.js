@@ -109,10 +109,14 @@ class Population {
                     percentaje+=1
                 }
             }
+
+
             // createDiv(`Resultados 😃: ${percentaje}`)
             if(this.winner.dna.outcome[0] =='1'){
+                createElement("h1",`${percentaje} tienen diabetes 😟`)
                 createElement("h1",`Tienes diabetes 😟`)
             } else {
+                createElement("h1",`${percentaje} tienen diabetes 😟`)
                 createElement("h1",`No tienes diabetes 😃`)
             }
             console.log(`El objetivo tiene un ${percentaje}% de probabilidades de tener la enferdad de diabetes`)
